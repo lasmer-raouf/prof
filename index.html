@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Systems Developer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --deep-blue: #001F3F;
+            --matte-black: #111111;
+            --crisp-white: #FFFFFF;
+            --neon-blue: #00BFFF;
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --glass-shadow: 0 8px 32px rgba(0, 31, 63, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(135deg, var(--deep-blue) 0%, var(--matte-black) 100%);
+            color: var(--crisp-white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+
+        .mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(17, 17, 17, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--neon-blue);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--crisp-white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-blue);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--neon-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--crisp-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            background: linear-gradient(45deg, var(--crisp-white), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(0, 191, 255, 0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--crisp-white), var(--neon-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(45deg, var(--neon-blue), #0099CC);
+            color: var(--crisp-white);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.3);
+        }
+
+        /* Glass Cards */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: var(--glass-shadow);
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 191, 255, 0.2);
+            border-color: var(--neon-blue);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--glass-shadow);
+        }
+
+        .tech-badge {
+            position: absolute;
+            background: var(--neon-blue);
+            color: var(--matte-black);
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .tech-badge:nth-child(1) { top: 10%; left: -10%; animation-delay: 0s; }
+        .tech-badge:nth-child(2) { top: 30%; right: -10%; animation-delay: 1s; }
+        .tech-badge:nth-child(3) { bottom: 20%; left: -5%; animation-delay: 2s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tech-tag {
+            background: var(--neon-blue);
+            color: var(--matte-black);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-category {
+            grid-column: 1 / -1;
+            margin: 3rem 0 1rem 0;
+            font-size: 1.8rem;
+            color: var(--neon-blue);
+            border-bottom: 2px solid var(--neon-blue);
+            padding-bottom: 0.5rem;
+        }
+
+        .project-card {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card h4 {
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .project-card p {
+            margin-bottom: 0.8rem;
+            font-size: 0.95rem;
+        }
+
+        .project-card strong {
+            color: var(--neon-blue);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            text-align: center;
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--neon-blue);
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category:hover .skill-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .skill-bars {
+            margin-top: 2rem;
+        }
+
+        .skill-bar {
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-progress {
+            height: 8px;
+            background: var(--glass-bg);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .skill-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--neon-blue), #0099CC);
+            border-radius: 4px;
+            width: 0;
+            transition: width 1.5s ease;
+        }
+
+        /* Blog Section */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .blog-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .blog-image {
+            height: 200px;
+            object-fit: cover;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .blog-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .blog-date {
+            color: var(--neon-blue);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-tags {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .blog-tag {
+            background: var(--glass-bg);
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--crisp-white);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 15px rgba(0, 191, 255, 0.2);
+        }
+
+        .form-label {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            color: var(--crisp-white);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .form-input:focus + .form-label,
+        .form-input:not(:placeholder-shown) + .form-label {
+            top: -0.5rem;
+            left: 0.5rem;
+            font-size: 0.8rem;
+            background: var(--deep-blue);
+            padding: 0 0.5rem;
+            color: var(--neon-blue);
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            color: var(--crisp-white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--neon-blue);
+            color: var(--matte-black);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--matte-black);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(17, 17, 17, 0.95);
+                flex-direction: column;
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .projects-grid,
+            .skills-grid,
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-category {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animation utilities */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="#" class="logo">Embedded<span class="neon">Dev</span></a>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Precision in Every <span class="neon">Circuit</span></h1>
+                <p>Embedded Systems Developer specializing in IoT, microcontrollers, and cutting-edge hardware solutions that bridge the digital and physical worlds.</p>
+                <a href="#projects" class="cta-button">Explore My Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="IMG_1087.jpeg" />
+                    <div class="tech-badge">ARM Cortex</div>
+                    <div class="tech-badge">IoT</div>
+                    <div class="tech-badge">RTOS</div>
+                </div>
+                <div class="about-text glass-card">
+                    <h3>Innovating at the Hardware-Software Interface</h3>
+                    <p>With over 3 years of experience in embedded systems development, I specialize in creating robust, efficient, and innovative solutions that push the boundaries of what's possible with modern hardware.</p>
+                    <p>My expertise spans across microcontroller programming, real-time operating systems, sensor integration, and low-power design principles. I'm passionate about creating technology that makes a real-world impact.</p>
+                    <div class="tech-stack">
+                        <h4>Core Technologies:</h4>
+                        <div class="tech-tags">
+                            <span class="tech-tag">C/C++</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">ARM Assembly</span>
+                            <span class="tech-tag">FreeRTOS</span>
+                            <span class="tech-tag">Zephyr</span>
+                            <span class="tech-tag">C# embedded</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-grid">
+                <!-- Beginner Projects -->
+                <div class="project-category">Beginner Projects (Foundations)</div>
+                
+                <div class="project-card glass-card">
+                    <h4>LED Blinker with Button Control</h4>
+                    <p><strong>Tools:</strong> STM32/Arduino, C</p>
+                    <p><strong>Result:</strong> LED toggles on/off when a button is pressed.</p>
+                    <p><strong>Challenge:</strong> Learned GPIO setup and debouncing to handle switch noise.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Temperature Monitor</h4>
+                    <p><strong>Tools:</strong> LM35 sensor, ADC, Serial monitor</p>
+                    <p><strong>Result:</strong> Displays real-time temperature readings.</p>
+                    <p><strong>Challenge:</strong> Calibrated ADC values for accurate readings.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>PWM LED Dimmer</h4>
+                    <p><strong>Tools:</strong> STM32/ESP32, PWM output</p>
+                    <p><strong>Result:</strong> Smooth LED brightness control with a potentiometer.</p>
+                    <p><strong>Challenge:</strong> Tuned PWM frequency to avoid flicker.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Digital Thermostat</h4>
+                    <p><strong>Tools:</strong> DS18B20 sensor, relay, LCD</p>
+                    <p><strong>Result:</strong> Controls heater ON/OFF based on temperature threshold.</p>
+                    <p><strong>Challenge:</strong> Implemented hysteresis to avoid relay chatter.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Ultrasonic Distance Meter</h4>
+                    <p><strong>Tools:</strong> HC-SR04, timer interrupts</p>
+                    <p><strong>Result:</strong> Measures distance and displays on LCD/serial.</p>
+                    <p><strong>Challenge:</strong> Timing precision and filtering noisy readings.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Simple Stopwatch</h4>
+                    <p><strong>Tools:</strong> STM32 timers, 7-segment display</p>
+                    <p><strong>Result:</strong> Start/stop/reset stopwatch with millisecond precision.</p>
+                    <p><strong>Challenge:</strong> Learned timer interrupts and display multiplexing.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Serial Command Interface</h4>
+                    <p><strong>Tools:</strong> UART, C</p>
+                    <p><strong>Result:</strong> Send text commands via serial to control LEDs or motors.</p>
+                    <p><strong>Challenge:</strong> Parsing input strings and implementing command interpreter.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Light Sensor Alarm</h4>
+                    <p><strong>Tools:</strong> LDR sensor, ADC, buzzer</p>
+                    <p><strong>Result:</strong> Triggers alarm when light falls below a set value.</p>
+                    <p><strong>Challenge:</strong> Implemented threshold detection and calibration.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Stepper Motor Controller</h4>
+                    <p><strong>Tools:</strong> 28BYJ-48 motor, ULN2003 driver</p>
+                    <p><strong>Result:</strong> Controls speed and direction of a stepper motor.</p>
+                    <p><strong>Challenge:</strong> Timing and step sequence control.</p>
+                </div>
+
+
+
+                <!-- Intermediate Projects -->
+                <div class="project-category">Intermediate Projects (IoT, RTOS)</div>
+                
+                <div class="project-card glass-card">
+                    <h4>FreeRTOS Task Scheduler Demo</h4>
+                    <p><strong>Tools:</strong> FreeRTOS, STM32</p>
+                    <p><strong>Result:</strong> Multiple concurrent tasks blinking LEDs and reading sensors.</p>
+                    <p><strong>Challenge:</strong> Learned RTOS scheduling, task priorities, and queues.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Home Weather Station</h4>
+                    <p><strong>Tools:</strong> BME280 sensor, LCD, ESP32</p>
+                    <p><strong>Result:</strong> Displays temp, humidity, pressure locally.</p>
+                    <p><strong>Challenge:</strong> Data smoothing and multi-sensor calibration.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Wireless Temp Node</h4>
+                    <p><strong>Tools:</strong> ESP32, MQTT, Wi-Fi</p>
+                    <p><strong>Result:</strong> Sends sensor data to cloud broker for visualization.</p>
+                    <p><strong>Challenge:</strong> Handling network instability and reconnection.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>BLE Beacon</h4>
+                    <p><strong>Tools:</strong> ESP32, BLE</p>
+                    <p><strong>Result:</strong> Advertises BLE packets with sensor data.</p>
+                    <p><strong>Challenge:</strong> Low-power BLE mode and advertising interval tuning.</p>
+                </div>
+
+<!--               <div class="project-card glass-card">
+                    <h4>Remote Relay Control (Wi-Fi)</h4>
+                    <p><strong>Tools:</strong> ESP32, web server</p>
+                    <p><strong>Result:</strong> Toggle devices remotely via web UI.</p>
+                    <p><strong>Challenge:</strong> Secure HTTP handling and state persistence.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>OTA Firmware Update</h4>
+                    <p><strong>Tools:</strong> ESP32 OTA APIs</p>
+                    <p><strong>Result:</strong> Device updates its firmware wirelessly.</p>
+                    <p><strong>Challenge:</strong> Secure bootloader and memory partition management.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Capacitive Touch Controller</h4>
+                    <p><strong>Tools:</strong> ESP32 touch pins</p>
+                    <p><strong>Result:</strong> Touch inputs for controlling LEDs or relays.</p>
+                    <p><strong>Challenge:</strong> Filtering false touches from noise.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>CAN Bus Sensor Network</h4>
+                    <p><strong>Tools:</strong> STM32 CAN peripherals</p>
+                    <p><strong>Result:</strong> Two boards exchanging sensor data over CAN.</p>
+                    <p><strong>Challenge:</strong> Message arbitration and error handling.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>GSM SMS Alert System</h4>
+                    <p><strong>Tools:</strong> SIM800 module, UART</p>
+                    <p><strong>Result:</strong> Sends SMS alerts based on sensor events.</p>
+                    <p><strong>Challenge:</strong> AT command parsing and network latency handling.</p>
+                </div>
+
+
+--> 
+                <!-- Advanced Projects -->
+                <div class="project-category">Advanced Projects (Startup-Level)</div>
+                
+                <div class="project-card glass-card">
+                    <h4>IoT Smart Lock</h4>
+                    <p><strong>Tools:</strong> ESP32 BLE, solenoid, AWS IoT</p>
+                    <p><strong>Result:</strong> BLE lock with cloud-based guest access.</p>
+                    <p><strong>Challenge:</strong> Security (encryption) and OTA updates.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>AI Edge Detection Camera</h4>
+                    <p><strong>Tools:</strong> Raspberry Pi, TensorFlow Lite</p>
+                    <p><strong>Result:</strong> Detects objects (people, pets) locally without cloud.</p>
+                    <p><strong>Challenge:</strong> Optimizing ML models for limited hardware.</p>
+                </div>
+<!--
+                <div class="project-card glass-card">
+                    <h4>LoRaWAN Environmental Node</h4>
+                    <p><strong>Tools:</strong> STM32 + LoRaWAN module</p>
+                    <p><strong>Result:</strong> Sends sensor data over kilometers.</p>
+                    <p><strong>Challenge:</strong> Ultra-low-power design and LoRaWAN stack setup.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>OTA Update Manager for Multiple Devices</h4>
+                    <p><strong>Tools:</strong> Custom bootloader + server</p>
+                    <p><strong>Result:</strong> Remotely manage and update many devices.</p>
+                    <p><strong>Challenge:</strong> Version management and fail-safe recovery.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Embedded Web Server</h4>
+                    <p><strong>Tools:</strong> STM32/ESP32 HTTP server</p>
+                    <p><strong>Result:</strong> Device serves a config dashboard via browser.</p>
+                    <p><strong>Challenge:</strong> Small footprint HTML and efficient HTTP handling.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Custom PCB Design</h4>
+                    <p><strong>Tools:</strong> KiCad/Altium</p>
+                    <p><strong>Result:</strong> Designed PCB for one IoT project.</p>
+                    <p><strong>Challenge:</strong> EMC compliance and proper grounding layout.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Industrial Sensor Gateway</h4>
+                    <p><strong>Tools:</strong> Linux SBC, Modbus → MQTT</p>
+                    <p><strong>Result:</strong> Bridges industrial sensors to cloud dashboard.</p>
+                    <p><strong>Challenge:</strong> Protocol translation and reliability.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Smart Energy Monitor</h4>
+                    <p><strong>Tools:</strong> ESP32 + Current sensors</p>
+                    <p><strong>Result:</strong> Monitors AC power consumption and sends to cloud.</p>
+                    <p><strong>Challenge:</strong> AC measurement calibration and safety.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Autonomous Mobile Robot</h4>
+                    <p><strong>Tools:</strong> STM32 motor drivers + sensors</p>
+                    <p><strong>Result:</strong> Robot navigates using path planning.</p>
+                    <p><strong>Challenge:</strong> Sensor fusion and control loops.</p>
+                </div>
+
+                <div class="project-card glass-card">
+                    <h4>Full Startup-Style Product</h4>
+                    <p><strong>Tools:</strong> Embedded + mobile + cloud</p>
+                    <p><strong>Result:</strong> Complete IoT product (hardware + firmware + backend + app).</p>
+                    <p><strong>Challenge:</strong> System integration, security, and scalability.</p>
+                </div>
+            -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="container">
+            <h2 class="section-title">Technical Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-category glass-card">
+                    <i class="fas fa-microchip skill-icon"></i>
+                    <h3>Hardware Design</h3>
+                    <p>PCB design, schematic capture, and component selection for optimal performance.</p>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <i class="fas fa-code skill-icon"></i>
+                    <h3>Embedded Software</h3>
+                    <p>Firmware development, driver implementation, and system architecture.</p>
+                </div>
+
+                <div class="skill-category glass-card">
+                    <i class="fas fa-wifi skill-icon"></i>
+                    <h3>Wireless Technologies</h3>
+                    <p>Bluetooth, WiFi, LoRa, and cellular connectivity solutions.</p>
+                </div>
+            </div>
+
+            <div class="skill-bars">
+                <div class="skill-bar">
+                    <div class="skill-info">
+                        <span>C/C++ Programming</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-info">
+                        <span>C# Embedded</span>
+                        <span>95%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 95%"></div>
+                    </div>
+                </div>                
+                <div class="skill-bar">
+                    <div class="skill-info">
+                        <span>Python</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-info">
+                        <span>PCB Design</span>
+                        <span>88%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 88%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-info">
+                        <span>VHDL</span>
+                        <span>30%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 95%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-info">
+                        <span>RTOS Development</span>
+                        <span>50%</span>
+                    </div>
+                    <div class="skill-progress">
+                        <div class="skill-progress-bar" style="width: 92%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <h2 class="section-title">Technical Insights</h2>
+            <div class="blog-grid">
+                <article class="blog-card glass-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5878886d-b3e3-4717-a34c-77258c5f1d50.png" alt="Optimizing power consumption in IoT devices with advanced sleep modes and efficient algorithms" class="blog-image" />
+                    <div class="blog-content">
+                        <div class="blog-date">March 15, 2024</div>
+                        <h3>Power Optimization Techniques for IoT Devices</h3>
+                        <p>Exploring advanced sleep modes, power gating, and efficient algorithm design for extended battery life in IoT applications.</p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">IoT</span>
+                            <span class="blog-tag">Power Management</span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="blog-card glass-card">
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/18f3af5c-8ca5-4de3-b993-86e3c26a219b.png" alt="Real-time operating system architecture with task scheduling and inter-process communication" class="blog-image" />
+                    <div class="blog-content">
+                        <div class="blog-date">February 28, 2024</div>
+                        <h3>RTOS vs Bare Metal: Choosing the Right Approach</h3>
+                        <p>Comparative analysis of real-time operating systems versus bare metal programming for embedded applications.</p>
+                        <div class="blog-tags">
+                            <span class="blog-tag">RTOS</span>
+                            <span class="blog-tag">Embedded</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info glass-card">
+                    <h3>Let's Build Something Amazing</h3>
+                    <p>I'm always interested in new challenges and opportunities to create innovative embedded solutions.</p>
+                    <p><i class="fas fa-envelope"></i> lassmerauf@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +216 95884929</p>
+                    <div class="social-links">
+                        <a href="https://github.com/lasmer-raouf" class="social-link"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/lassmer-abderraouf" class="social-link"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/rafa.xtn" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
