@@ -832,7 +832,15 @@
                     <p><strong>Result:</strong> Complete IoT product (hardware + firmware + backend + app).</p>
                     <p><strong>Challenge:</strong> System integration, security, and scalability.</p>
                 </div>
-            -->
+-->
+                <!-- LumiHopper — EMGT Hackathon project -->
+                <div class="project-card glass-card">
+                    <h4>LumiHopper — Système de récolte automatisée (EMGT Hackathon)</h4>
+                    <p><strong>Outils :</strong> Raspberry Pi 4 (Master), ESP32-CAM (slaves), MQTT, MobileNetV2, panneaux solaires, LiFePO₄.</p>
+                    <p><strong>Résumé :</strong> LumiHopper est un conteneur-ferme (40ft) sur 2 niveaux optimisé pour séparer et collecter les criquets adultes en exploitant leur comportement de saut via lumière, chaleur, ventilations et convoyeurs pour une récolte rapide, propre et peu stressante.</p>
+                    <p><strong>Architecture :</strong> Master = Raspberry Pi (station centrale) ; Slaves = modules ESP32 près des points d’action (caméras, actionneurs, capteurs) ; communication MQTT ; classification MobileNetV2 (adultes / non-adultes / morts).</p>
+                    <p><strong>Objectifs & résultats visés :</strong> récolter 500–1000 adultes en <5 min, précision ≥90%, consommation ≤50W/cycle, autonomie solaire et survie ≥95%.</p>
+                </div>
             </div>
         </div>
     </section>
@@ -928,9 +936,9 @@
                 <article class="blog-card glass-card">
                     <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/5878886d-b3e3-4717-a34c-77258c5f1d50.png" alt="Optimizing power consumption in IoT devices with advanced sleep modes and efficient algorithms" class="blog-image" />
                     <div class="blog-content">
-                        <div class="blog-date">March 15, 2024</div>
+                        <div class="blog-date">November 10, 2025</div>
                         <h3>Power Optimization Techniques for IoT Devices</h3>
-                        <p>Exploring advanced sleep modes, power gating, and efficient algorithm design for extended battery life in IoT applications.</p>
+                        <p>Updated techniques for 2025: advanced sleep modes, power gating and algorithm-level optimizations applied to low-power IoT prototypes (see LumiHopper energy budget and solar autonomy).</p>
                         <div class="blog-tags">
                             <span class="blog-tag">IoT</span>
                             <span class="blog-tag">Power Management</span>
@@ -939,20 +947,21 @@
                 </article>
 
                 <article class="blog-card glass-card">
-                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/18f3af5c-8ca5-4de3-b993-86e3c26a219b.png" alt="Real-time operating system architecture with task scheduling and inter-process communication" class="blog-image" />
+                    <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/18f3af5c-8ca5-4de3-b993-86e3c26a219b.png" alt="LumiHopper EMGT Hackathon — architecture and AI-assisted collection" class="blog-image" />
                     <div class="blog-content">
-                        <div class="blog-date">February 28, 2024</div>
-                        <h3>RTOS vs Bare Metal: Choosing the Right Approach</h3>
-                        <p>Comparative analysis of real-time operating systems versus bare metal programming for embedded applications.</p>
+                        <div class="blog-date">November 01, 2025</div>
+                        <h3>LumiHopper: Automated Harvesting System — EMGT Hackathon 2025</h3>
+                        <p>Résumé du prototype: conteneur-ferme 40ft à 2 niveaux, Raspberry Pi master, ESP32-CAM slaves, MobileNetV2 pour classification (adultes/non-adultes/morts), communication MQTT et conception pour autonomie solaire.</p>
                         <div class="blog-tags">
-                            <span class="blog-tag">RTOS</span>
-                            <span class="blog-tag">Embedded</span>
+                            <span class="blog-tag">Robotics</span>
+                            <span class="blog-tag">AI</span>
+                            <span class="blog-tag">IoT</span>
                         </div>
                     </div>
                 </article>
-            </div>
-        </div>
-    </section>
+             </div>
+         </div>
+     </section>
 
     <!-- Contact Section -->
     <section id="contact" class="contact">
@@ -970,3 +979,54 @@
                         <a href="https://www.instagram.com/rafa.xtn" class="social-link"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
+                <div class="contact-form glass-card">
+                    <div class="form-group">
+                        <input type="text" class="form-input" placeholder=" " id="name" required />
+                        <label for="name" class="form-label">Your Name</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-input" placeholder=" " id="email" required />
+                        <label for="email" class="form-label">Your Email</label>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-input" placeholder=" " id="message" required></textarea>
+                        <label for="message" class="form-label">Your Message</label>
+                    </div>
+                    <button type="submit" class="cta-button">Send Message</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Abderraouf Lasmer. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Fade-in animation for sections
+        const sections = document.querySelectorAll('section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>
